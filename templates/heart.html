@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical XAI System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="app-body">
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/heart">
+            <button class="active"><span>Heart</span></button>
+        </a>
+
+        <a href="/diabetes">
+            <button><span>Diabetes</span></button>
+        </a>
+
+        <a href="/breast_cancer">
+            <button><span>Breast Cancer</span></button>
+        </a>
+    </div>
+
+
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="header">
+            <h1>Heart Disease Prediction</h1>
+            <p>AI-powered Clinical Decision Support with Explainable AI</p>
+        </div>
+
+        <div class="card">
+            <form action="/predict_heart" method="post">
+
+                <div class="form-grid">
+
+                    <!-- 1 -->
+                    <div>
+                        <label>Age</label>
+                        <input type="number" name="age" required>
+                    </div>
+
+                    <!-- 2 -->
+                    <div>
+                        <label>Sex</label>
+                        <select name="sex">
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+
+                    <!-- 3 -->
+                    <div>
+                        <label>Chest Pain Type</label>
+                        <select name="cp">
+                            <option value="0">Typical Angina</option>
+                            <option value="1">Atypical Angina</option>
+                            <option value="2">Non-anginal Pain</option>
+                            <option value="3">Asymptomatic</option>
+                        </select>
+                    </div>
+
+                    <!-- 4 -->
+                    <div>
+                        <label>Resting Blood Pressure</label>
+                        <input type="number" name="trestbps" required>
+                    </div>
+
+                    <!-- 5 -->
+                    <div>
+                        <label>Cholesterol</label>
+                        <input type="number" name="chol" required>
+                    </div>
+
+                    <!-- 6 -->
+                    <div>
+                        <label>Fasting Blood Sugar</label>
+                        <select name="fbs">
+                            <option value="0">Normal</option>
+                            <option value="1">High</option>
+                        </select>
+                    </div>
+
+                    <!-- 7 -->
+                    <div>
+                        <label>Resting ECG</label>
+                        <select name="restecg">
+                            <option value="0">Normal</option>
+                            <option value="1">ST-T Abnormality</option>
+                            <option value="2">Left Ventricular Hypertrophy</option>
+                        </select>
+                    </div>
+
+                    <!-- 8 -->
+                    <div>
+                        <label>Max Heart Rate Achieved</label>
+                        <input type="number" name="thalach" required>
+                    </div>
+
+                    <!-- 9 -->
+                    <div>
+                        <label>Exercise Induced Angina</label>
+                        <select name="exang">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <!-- 10 -->
+                    <div>
+                        <label>Oldpeak (ST Depression)</label>
+                        <input type="number" step="0.1" name="oldpeak" required>
+                    </div>
+
+                    <!-- 11 -->
+                    <div>
+                        <label>Slope</label>
+                        <select name="slope">
+                            <option value="0">Upsloping</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Downsloping</option>
+                        </select>
+                    </div>
+
+                    <!-- 12 -->
+                    <div>
+                        <label>Number of Blocked Vessels (ca)</label>
+                        <input type="number" min="0" max="4" name="ca" required>
+                    </div>
+
+                    <!-- 13 -->
+                    <div>
+                        <label>Thal</label>
+                        <select name="thal">
+                            <option value="1">Normal</option>
+                            <option value="2">Fixed Defect</option>
+                            <option value="3">Reversible Defect</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button class="submit-btn">Predict with XAI</button>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

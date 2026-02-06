@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breast Cancer Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="app-body">
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/heart"><button><span>Heart</span></button></a>
+        <a href="/diabetes"><button><span>Diabetes</span></button></a>
+        <a href="/breast_cancer">
+            <button class="active"><span>Breast Cancer</span></button>
+        </a>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+        <div class="header">
+            <h1>Breast Cancer Prediction</h1>
+            <p>Explainable AI assisted oncology decision support</p>
+        </div>
+
+        <div class="card">
+            <form action="/predict_breast_cancer" method="post">
+
+                <!-- ===== MEAN VALUES ===== -->
+                <div class="form-section">
+                    <h3 class="section-title">Mean Values</h3>
+                    <div class="form-grid">
+                        {% for f in [
+                            "radius_mean","texture_mean","perimeter_mean","area_mean",
+                            "smoothness_mean","compactness_mean","concavity_mean",
+                            "concave_points_mean","symmetry_mean","fractal_dimension_mean"
+                        ] %}
+                        <div>
+                            <label>{{ f.replace("_", " ").title() }}</label>
+                            <input type="number" step="any" name="{{ f }}" required>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- ===== STANDARD ERROR VALUES ===== -->
+                <div class="form-section">
+                    <h3 class="section-title">Standard Error Values</h3>
+                    <div class="form-grid">
+                        {% for f in [
+                            "radius_se","texture_se","perimeter_se","area_se",
+                            "smoothness_se","compactness_se","concavity_se",
+                            "concave_points_se","symmetry_se","fractal_dimension_se"
+                        ] %}
+                        <div>
+                            <label>{{ f.replace("_", " ").title() }}</label>
+                            <input type="number" step="any" name="{{ f }}" required>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- ===== WORST VALUES ===== -->
+                <div class="form-section">
+                    <h3 class="section-title">Worst Values</h3>
+                    <div class="form-grid">
+                        {% for f in [
+                            "radius_worst","texture_worst","perimeter_worst","area_worst",
+                            "smoothness_worst","compactness_worst","concavity_worst",
+                            "concave_points_worst","symmetry_worst","fractal_dimension_worst"
+                        ] %}
+                        <div>
+                            <label>{{ f.replace("_", " ").title() }}</label>
+                            <input type="number" step="any" name="{{ f }}" required>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button class="submit-btn">Predict with XAI</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

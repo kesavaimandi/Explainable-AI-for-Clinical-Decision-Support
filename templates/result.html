@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ disease }} XAI Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="app-body">
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/heart">
+            <button class="{% if disease == 'Heart' %}active{% endif %}">
+                <span>Heart</span>
+            </button>
+        </a>
+
+        <a href="/diabetes">
+            <button class="{% if disease == 'Diabetes' %}active{% endif %}">
+                <span>Diabetes</span>
+            </button>
+        </a>
+
+        <a href="/breast_cancer">
+            <button class="{% if disease == 'Breast Cancer' %}active{% endif %}">
+                <span>Breast Cancer</span>
+            </button>
+        </a>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <div class="header">
+            <h1>{{ disease }} XAI Report</h1>
+            <p>Explainable AI assisted clinical interpretation</p>
+        </div>
+
+        <div class="result-box">
+
+            <div class="risk-banner">
+                <strong>Risk Level:</strong> {{ report.risk_level }} <br>
+                <strong>Risk Percentage:</strong> {{ report.risk_percentage }}%
+            </div>
+
+            <table>
+                <tr>
+                    <th>Current Problems</th>
+                    <th>Future Risks</th>
+                    <th>Protective Factors</th>
+                    <th>Recommended Precautions</th>
+                </tr>
+
+                <tr>
+                    <td>
+                        <ul>
+                            {% for item in report.current_problems %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+
+                    <td>
+                        <ul>
+                            {% for item in report.future_risks %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    
+                    <td>
+                        <ul>
+                            {% for item in report.protective_factors %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+
+                    <td>
+                        <ul>
+                            {% for item in report.precautions %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+
+            <a class="back-link" href="{{ back_url }}">← Check Another Patient</a>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

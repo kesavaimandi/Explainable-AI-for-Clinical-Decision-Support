@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clinical XAI Decision Support</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="landing-body">
+
+<div class="hero hero-merged">
+
+    <div class="hero-text">
+        <span class="badge">Clinical AI • Explainable • Trusted</span>
+
+        <h1>
+            Explainable AI<br>
+            for Clinical<br>
+            Decision Support
+        </h1>
+
+        <p>
+            A next-generation medical AI system that predicts disease risk
+            and explains <strong>why</strong> — helping doctors make confident,
+            informed decisions.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/heart" class="primary-btn">Start Disease Prediction</a>
+            <span class="note">Doctor-support system • Not a replacement</span>
+        </div>
+    </div>
+
+    <div class="neural-visual" id="neuralVisual">
+        <svg class="neural-lines" id="neuralLines"></svg>
+
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+        <div class="neural-node"></div><div class="neural-node"></div>
+
+    </div>
+
+</div>
+
+<script>
+const visual = document.getElementById("neuralVisual");
+const nodes = Array.from(document.querySelectorAll(".neural-node"));
+const svg = document.getElementById("neuralLines");
+
+/* Node physics */
+const nodeData = nodes.map(() => ({
+    x: Math.random() * 0.85 + 0.15, // bias slightly toward center
+    y: Math.random(),
+    vx: (Math.random() - 0.5) * 0.0005,
+    vy: (Math.random() - 0.5) * 0.0005
+}));
+
+function resizeSVG() {
+    svg.setAttribute("width", visual.clientWidth);
+    svg.setAttribute("height", visual.clientHeight);
+}
+resizeSVG();
+window.addEventListener("resize", resizeSVG);
+
+function animate() {
+    svg.innerHTML = "";
+
+    nodeData.forEach((n, i) => {
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0.05 || n.x > 0.95) n.vx *= -1;
+        if (n.y < 0.05 || n.y > 0.95) n.vy *= -1;
+
+        const px = n.x * visual.clientWidth;
+        const py = n.y * visual.clientHeight;
+
+        nodes[i].style.left = px + "px";
+        nodes[i].style.top = py + "px";
+
+        nodeData.forEach((m, j) => {
+            if (i !== j) {
+                const dx = n.x - m.x;
+                const dy = n.y - m.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 0.15) {
+                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", px);
+                    line.setAttribute("y1", py);
+                    line.setAttribute("x2", m.x * visual.clientWidth);
+                    line.setAttribute("y2", m.y * visual.clientHeight);
+                    line.setAttribute("stroke", "rgba(90,190,230,0.25)");
+                    line.setAttribute("stroke-width", "1");
+                    svg.appendChild(line);
+                }
+            }
+        });
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
